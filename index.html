@@ -5,24 +5,86 @@
   <title>Web Sprint 2 Challenge</title>
   <script id="challenge">
     // 👉 CHALLENGE 1
-    function profileActivation(profile, reason) {
+    function profileActivation(profile, reason) { 
 
-    }
+      if(profile.active){
+        if(!reason) {
+          return "confirm status manually";
+        } else {
+          return { active: false, reason}
+        }
+        }else {
+          return { active: true}
+        }
+      }
 
     // 👉 CHALLENGE 2
     function mineSweeper(grid, x, y) {
 
+   if (x < 1 || x > 3 || y < 1 || y > 3) {
+    return "invalid coordinates";
     }
+    const column = x - 1;
+    const row = y - 1;
+    const boi = grid[row][column];
+   if (boi === "🟥") {
+   return "🟥 💀";
+    }   else if (boi === "🟦") {
+    return "🟦 🥳";
+    }
+   }
 
     // 👉 CHALLENGE 3
     function booleanize(obj) {
-
-    }
+      for(let prop in obj){
+        if(prop.length > 9){
+          return "shorten all prop names to 9 chars or less"
+        }
+        if(obj[prop] === 0){
+          obj[prop] = false
+        } else if(obj[prop] === 1){
+          obj[prop] = true
+        } if (obj[prop] === null){
+          delete obj[prop]
+        }
+      }
+      return obj
+  } //
 
     // 👉 CHALLENGE 4
-    function scrub(text, forbidden) {
 
-    }
+    function scrub(text, forbidden) {
+      let words = text.split(' ')
+      let scrubbedWords = []
+
+      console.log(words)
+
+      for(let idx in words){
+        const word = words[idx]
+        let scrubbedWord = word
+        for(let idx in forbidden){
+          const forbiddenWord = forbidden[idx]
+          if(word === forbiddenWord){
+            let substitute = ''
+            for(let idx in word){
+              substitute += 'x'
+            }
+            scrubbedWord = substitute
+            break
+          }
+        }
+        scrubbedWords.push(scrubbedWord)
+      }
+      return scrubbedWords.join(' ')
+
+
+      }
+
+    //1. Replace each word in `text` that is included in the `forbidden` array with a string of "x" characters of equal 
+    //length to the forbidden word.
+    //2. Ensure no punctuation is used in the text.
+    //3. If `text` is empty or there are no forbidden words, return the original text.
+
 
     // 👉 CHALLENGE 5 (bonus, NOT graded)
     function normalizePhoneNumber(num) {
